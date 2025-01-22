@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 import pandera
-from json_reader import DataFrameReader  
+from json_reader import DataFrameReader
 
 # Test Data
 CALLS_JSON = """
@@ -34,24 +34,28 @@ OPERATORS_JSON = """
 """
 
 
-
 # sample valid data for pandera
-VALID_DATA = pd.DataFrame({
-    "id": ["d84823c1-1d67-45ca-8b75-6b29e4f330a1"],
-    "date": ["2023-01-01"],
-    "operator": ["EE"],
-    "number": ["+441234567890"],
-    "score": [0.5],
-})
+VALID_DATA = pd.DataFrame(
+    {
+        "id": ["d84823c1-1d67-45ca-8b75-6b29e4f330a1"],
+        "date": ["2023-01-01"],
+        "operator": ["EE"],
+        "number": ["+441234567890"],
+        "score": [0.5],
+    }
+)
 
 # sample invalid data for pandera
-INVALID_DATA = pd.DataFrame({
-    "id": ["invalid-uuid"],  # Invalid UUID
-    "date": ["invalid-date"],  # Invalid date
-    "operator": [""],  # Empty operator name
-    "number": ["12345"],  # Invalid phone number
-    "score": [1.5],  # Score out of range
-})
+INVALID_DATA = pd.DataFrame(
+    {
+        "id": ["invalid-uuid"],  # Invalid UUID
+        "date": ["invalid-date"],  # Invalid date
+        "operator": [""],  # Empty operator name
+        "number": ["12345"],  # Invalid phone number
+        "score": [1.5],  # Score out of range
+    }
+)
+
 
 @pytest.fixture
 def dataframe_reader():
@@ -62,6 +66,7 @@ def dataframe_reader():
     operators_df = pd.read_json(OPERATORS_JSON)
     return DataFrameReader(calls_df=calls_df, operators_df=operators_df)
 
+
 @pytest.fixture
 def dataframe_reader_pandera():
     """
@@ -71,14 +76,17 @@ def dataframe_reader_pandera():
     operators_df = pd.DataFrame()  # Empty operators for this test
     return DataFrameReader(calls_df, operators_df)
 
+
 def test_transform_raw_json(dataframe_reader):
     """
     Test the `_transform_raw_json` method to ensure data is flattened correctly.
     """
-    transformed_calls = dataframe_reader._transform_raw_json(dataframe_reader.calls_df, 'data')
+    transformed_calls = dataframe_reader._transform_raw_json(
+        dataframe_reader.calls_df, "data"
+    )
     assert isinstance(transformed_calls, pd.DataFrame)
-    assert 'attributes.number' in transformed_calls.columns
-    assert 'attributes.operator' in transformed_calls.columns
+    assert "attributes.number" in transformed_calls.columns
+    assert "attributes.operator" in transformed_calls.columns
 
 
 def test_pandera_valid_data(dataframe_reader):
@@ -96,6 +104,7 @@ def test_pandera_valid_data(dataframe_reader):
         assert len(validated_data) == len(valid_data)
     except pandera.errors.SchemaError as e:
         pytest.fail(f"Valid data failed schema validation: {e}")
+
 
 def test_pandera_invalid_data(dataframe_reader):
     """
