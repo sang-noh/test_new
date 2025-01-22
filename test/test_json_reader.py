@@ -93,7 +93,7 @@ def test_pandera_valid_data(dataframe_reader_pandera):
     """
     Test that valid data passes the pandera schema check.
     """
-    schema = dataframe_reader.pandera_check("calls_data")
+    schema = dataframe_reader_pandera.pandera_check("calls_data")
     valid_data = VALID_DATA.copy()
     valid_data["date"] = pd.to_datetime(valid_data["date"])  # Ensure correct data type
 
@@ -110,7 +110,7 @@ def test_pandera_invalid_data(dataframe_reader_pandera):
     """
     Test that invalid data raises a pandera SchemaError.
     """
-    schema = dataframe_reader.pandera_check("calls_data")
+    schema = dataframe_reader_pandera.pandera_check("calls_data")
     invalid_data = INVALID_DATA.copy()
 
     # Attempt validation and check for SchemaError
