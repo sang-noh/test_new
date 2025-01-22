@@ -89,7 +89,7 @@ def test_transform_raw_json(dataframe_reader):
     assert "attributes.operator" in transformed_calls.columns
 
 
-def test_pandera_valid_data(dataframe_reader):
+def test_pandera_valid_data(dataframe_reader_pandera):
     """
     Test that valid data passes the pandera schema check.
     """
@@ -106,7 +106,7 @@ def test_pandera_valid_data(dataframe_reader):
         pytest.fail(f"Valid data failed schema validation: {e}")
 
 
-def test_pandera_invalid_data(dataframe_reader):
+def test_pandera_invalid_data(dataframe_reader_pandera):
     """
     Test that invalid data raises a pandera SchemaError.
     """
