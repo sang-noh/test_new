@@ -18,6 +18,15 @@ and validating the dataset with a pandera schema. The pandera schema checks each
 within the columns as well. The pandera schema has been added as a dictionary, as to ensure further schemas can be added for 
 different datasets to create a catalogue for future use. 
 
+To run the code, you can type:
+
+make run 
+
+
+To run the tests, you can run: 
+
+make test
+
 
 Further improvements could have been made with time - the static inputs of strings and scores could be changed to flexible inputs 
 to ensure that with changing conventions of acceptable score, we can create general code.
