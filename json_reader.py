@@ -18,6 +18,8 @@ class DataFrameReader:
         Raw inputs to transform for the json files
         """
 
+        print("changing a random line")
+
         # to help with testing, we can make the constructor from the string or just take in a dataframe
         if isinstance(calls_df, str):
             self.calls_df = pd.read_json(calls_df)
