@@ -63,7 +63,7 @@ class DataFrameReader:
         try:
             return float(x.split("-")[1])  # split and convert to float
         except (IndexError, ValueError, AttributeError):
-            return "Unknown"  # return None for invalid values
+            return "UnknowN"  # return None for invalid values
 
     def _impute_operators(self, df: pd.DataFrame) -> pd.DataFrame:
         """
