@@ -98,7 +98,7 @@ class DataFrameReader:
         self, df_calls: pd.DataFrame, df_operators: pd.DataFrame
     ) -> pd.DataFrame:
         """
-        Join dataframe and filter based on the values new
+        Join dataframe and filter based on the values new2
         """
         joined_dataframe = pd.merge(df_calls, df_operators, how="cross")
         dataframe_after_comparison = joined_dataframe[
